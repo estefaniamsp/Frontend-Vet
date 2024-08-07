@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthProvider";
 import { useContext } from "react";
 import axios from "axios";
 
-const socket = io('http://localhost:3000');
+const socket = io(`${import.meta.env.VITE_BACKEND_URL}`.replace("/api", ""));
 
 const Chat = () => {
 	const [mensaje, setMensaje] = useState("");
