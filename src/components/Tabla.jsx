@@ -25,7 +25,7 @@ const Tabla = () => {
 				}
 			);
 			setPacientes(respuesta.data, ...pacientes);
-			console.log(respuesta.data);
+			
 		} catch (error) {}
 	};
 

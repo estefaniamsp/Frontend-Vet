@@ -9,12 +9,13 @@ export const NuevoPassword = () => {
 	const { token } = useParams();
 
 	const navigate = useNavigate();
+	const [alerta, setAlerta] = useState({});
 
 	const [form, setForm] = useState({
 		password: "",
 		confirmPassword: "",
 	});
-	const [alerta, setAlerta] = useState({});
+	
 
 	const handleChange = (e) => {
 		setForm({
@@ -35,7 +36,7 @@ export const NuevoPassword = () => {
 			setTimeout(() => {
 				navigate("/login");
 			}, 5000);
-			console.log(respuesta);
+			
 		} catch (error) {
 			setAlerta({ respuesta: error.response.data.res, exito: false });
 		}

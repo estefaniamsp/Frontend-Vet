@@ -19,6 +19,7 @@ const Visualizar = () => {
 		tratamientos,
 		setTratamientos,
 		alertaTratamiento,
+		setDataModal,
 	} = useContext(TratamientosContext);
 
 	const formatearFecha = (fecha) => {
@@ -45,7 +46,7 @@ const Visualizar = () => {
 						},
 					}
 				);
-				console.log(respuesta.data);
+
 				setPaciente(respuesta.data.paciente);
 				setTratamientos(respuesta.data.tratamientos);
 			} catch (error) {
@@ -53,7 +54,7 @@ const Visualizar = () => {
 			}
 		};
 		consultarPaciente();
-	}, []);
+	}, [tratamientos]);
 
 	return (
 		<div>
@@ -124,7 +125,10 @@ const Visualizar = () => {
 						{auth.rol === "veterinario" && (
 							<button
 								className="px-5 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700"
-								onClick={handleModal}
+								onClick={() => {
+									setDataModal({});
+									handleModal();
+								}}
 							>
 								Registrar
 							</button>
@@ -142,7 +146,10 @@ const Visualizar = () => {
 									{alertaTratamiento.respuesta}
 								</Alertas>
 							)}
-							<TablaTratamientos tratamientos={tratamientos} />
+							<TablaTratamientos
+								tratamientos={tratamientos}
+								idPaciente={paciente._id}
+							/>
 						</>
 					)}
 				</>

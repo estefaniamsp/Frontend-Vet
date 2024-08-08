@@ -2,13 +2,17 @@ import { useContext, useState } from "react";
 import TratamientosContext from "@context/TratamientosProvider";
 
 const ModalTratamiento = ({ idPaciente }) => {
-	const { handleModal, setModal, registrarTratamientos } =
-		useContext(TratamientosContext);
+	const {
+		handleModal,
+		registrarTratamientos,
+		actualizarTratamiento,
+		dataModal
+	} = useContext(TratamientosContext);
 
 	const [form, setform] = useState({
-		nombre: "",
-		descripcion: "",
-		prioridad: "",
+		nombre: dataModal?.nombre ?? "",
+		descripcion: dataModal?.descripcion ?? "",
+		prioridad: dataModal?.prioridad ?? "",
 		paciente: idPaciente,
 	});
 
@@ -18,8 +22,11 @@ const ModalTratamiento = ({ idPaciente }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		registrarTratamientos(form);
-		setModal(false);
+
+		dataModal?.nombre
+			? actualizarTratamiento(form, dataModal._id)
+			: registrarTratamientos(form);
+		handleModal();
 	};
 
 	return (
@@ -102,7 +109,7 @@ const ModalTratamiento = ({ idPaciente }) => {
 						className="bg-green-700 px-6 
                     text-slate-300 rounded-lg 
                     hover:bg-green-900 cursor-pointer"
-						value="Registrar"
+						value={dataModal.nombre ? "Actualizar" : "Registrar"}
 					/>
 
 					<button

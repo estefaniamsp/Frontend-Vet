@@ -4,7 +4,6 @@ import axios from "axios";
 import Alertas from "@components/Alertas";
 import { useContext } from "react";
 import { AuthContext } from "@context/AuthProvider";
-import { useEffect } from "react";
 
 export const Formulario = ({ paciente }) => {
 	const navigate = useNavigate();

@@ -7,9 +7,13 @@ import {
 import TratamientosContext from "@context/TratamientosProvider";
 import { AuthContext } from "@context/AuthProvider";
 
-const TablaTratamientos = ({ tratamientos }) => {
-	const { eliminarTratamiento, actualizarEstadoTratamiento } =
-		useContext(TratamientosContext);
+const TablaTratamientos = ({ tratamientos, idPaciente }) => {
+	const {
+		eliminarTratamiento,
+		actualizarEstadoTratamiento,
+		handleModal,
+		setDataModal
+	} = useContext(TratamientosContext);
 
 	const { auth } = useContext(AuthContext);
 
@@ -44,7 +48,14 @@ const TablaTratamientos = ({ tratamientos }) => {
 						</td>
 						{auth.rol === "veterinario" && (
 							<td className="py-2 text-center">
-								<MdPublishedWithChanges className="h-7 w-7 text-slate-800 cursor-pointer inline-block mr-2" />
+
+								<MdPublishedWithChanges
+									className="h-7 w-7 text-slate-800 cursor-pointer inline-block mr-2"
+									onClick={() => {
+										setDataModal(tratamiento);
+										handleModal();
+									}}
+								/>
 
 								<MdOutlineSecurityUpdateGood
 									className="h-7 w-7 text-slate-800 cursor-pointer inline-block mr-2"

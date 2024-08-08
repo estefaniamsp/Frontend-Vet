@@ -5,6 +5,7 @@ const TratamientosContext = createContext();
 
 const TratamientosProvider = ({ children }) => {
 	const [modal, setModal] = useState(false);
+	const [dataModal, setDataModal] = useState({});
 	const [tratamientos, setTratamientos] = useState([]);
 	const [alertaTratamiento, setAlertaTratamiento] = useState({});
 
@@ -28,6 +29,37 @@ const TratamientosProvider = ({ children }) => {
 			setTratamientos([respuesta.data.tratamiento, ...tratamientos]);
 			setAlertaTratamiento({
 				respuesta: "Tratamiento registrado con exito",
+				exito: true,
+			});
+		} catch (error) {
+			setAlertaTratamiento({
+				respuesta: error.response.data.res,
+				exito: false,
+			});
+		}
+	};
+
+	const actualizarTratamiento = async (datos, id) => {
+		try {
+			const respuesta = await axios.put(
+				`${import.meta.env.VITE_BACKEND_URL}/tratamiento/${id}`,
+				datos,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem(
+							"token"
+						)}`,
+					},
+				}
+			);
+			setTratamientos(
+				tratamientos.map((tratamiento) =>
+					tratamiento._id === id ? respuesta.data.tratamiento : tratamiento
+				)
+			);
+			setAlertaTratamiento({
+				respuesta: "Tratamiento actualizado con exito",
 				exito: true,
 			});
 		} catch (error) {
@@ -111,8 +143,11 @@ const TratamientosProvider = ({ children }) => {
 				alertaTratamiento,
 				setTratamientos,
 				registrarTratamientos,
+				actualizarTratamiento,
 				eliminarTratamiento,
 				actualizarEstadoTratamiento,
+				dataModal,
+				setDataModal,
 			}}
 		>
 			{children}

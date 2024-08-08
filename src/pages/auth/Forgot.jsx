@@ -5,7 +5,6 @@ import axios from "axios";
 
 export const Forgot = () => {
 	const [email, setEmail] = useState("");
-
 	const [alerta, setAlerta] = useState({});
 
 	const handleChange = (e) => {

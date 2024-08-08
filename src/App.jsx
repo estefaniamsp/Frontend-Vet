@@ -20,6 +20,7 @@ import { AuthProvider } from "@context/AuthProvider";
 import { PrivateRoute } from "@routes/PrivateRoutes";
 import { TratamientosProvider } from "@context/TratamientosProvider";
 import Chat from "@pages/Chat";
+import PrivateRouteWithRole from "@routes/PrivateRouteWithRole";
 
 function App() {
 	return (
@@ -69,7 +70,11 @@ function App() {
 												/>
 												<Route
 													path="crear"
-													element={<Crear />}
+													element={
+														<PrivateRouteWithRole>
+															<Crear />
+														</PrivateRouteWithRole>
+													}
 												/>
 												<Route
 													path="actualizar/:id"

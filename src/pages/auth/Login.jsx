@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-	const { auth, setAuth, data } = useContext(AuthContext);
+	const { setAuth } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 

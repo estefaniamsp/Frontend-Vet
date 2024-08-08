@@ -23,7 +23,7 @@ export const LandinPage = () => {
                 <section>
                     <nav className="p-10 mb-12 flex justify-between">
                         <h1 className="text-2xl font-bold dark:text-white">
-                            App-Demo
+                            Veterinary Management
                         </h1>
                         <ul className="flex items-center">
                             <li>

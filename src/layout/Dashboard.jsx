@@ -2,12 +2,21 @@ import { useContext } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "@context/AuthProvider";
 import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Dashboard = () => {
 	const location = useLocation();
 	const urlActual = location.pathname;
+	const [rol, setRol] = useState("");
 
 	const { auth } = useContext(AuthContext);
+	const { nombre } = auth;
+
+	useEffect(() => {
+		setRol(auth.rol);
+		console.log(auth);
+	}, []);
 
 	return (
 		<div className="md:flex md:min-h-screen">
@@ -26,9 +35,9 @@ const Dashboard = () => {
 				<p className="text-slate-400 text-center my-4 text-sm">
 					{" "}
 					<span className="bg-green-600 w-3 h-3 inline-block rounded-full"></span>{" "}
-					Bienvenido - {auth?.nombre}
+					Bienvenido - {nombre}
 					<br />
-					Rol - {auth?.rol}
+					Rol - {rol || auth.rol}
 				</p>
 
 				<hr className="mt-5 border-slate-500" />
@@ -60,7 +69,7 @@ const Dashboard = () => {
 						</Link>
 					</li>
 
-					{auth?.rol === "veterinario" && (
+					{(rol === "veterinario" || auth.rol === "veterinario") && (
 						<li className="text-center">
 							<Link
 								to="/dashboard/crear"
@@ -93,7 +102,7 @@ const Dashboard = () => {
 			<div className="flex-1 flex flex-col justify-between h-screen bg-gray-100">
 				<div className="bg-gray-800 py-2 flex md:justify-end items-center gap-5 justify-center">
 					<div className="text-md font-semibold text-slate-100">
-						Usuario - {auth?.nombre}
+						Usuario - {nombre}
 					</div>
 					<div>
 						<img

@@ -8,7 +8,6 @@ export const Reestablecer = () => {
 	const { token } = useParams();
 
 	const [alerta, setAlerta] = useState({});
-
 	const [tokenBack, setTokenBack] = useState("");
 
 	const verifyToken = async () => {

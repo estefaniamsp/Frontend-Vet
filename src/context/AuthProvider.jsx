@@ -23,7 +23,9 @@ export const AuthProvider = ({ children }) => {
 			);
 
 			setAuth(response.data);
-		} catch (error) {}
+		} catch (error) {
+			localStorage.removeItem("token");
+		}
 	};
 
 	const actualizarPerfil = async (datos) => {
