@@ -7,7 +7,7 @@ import TratamientosContext from "@context/TratamientosProvider";
 import TablaTratamientos from "@components/TablaTratamientos";
 import { AuthContext } from "@context/AuthProvider";
 
-const Visualizar = () => {
+const Visualizar = (idPaciente) => {
 	const { id } = useParams();
 	const [paciente, setPaciente] = useState({});
 	const [alerta, setAlerta] = useState({});
